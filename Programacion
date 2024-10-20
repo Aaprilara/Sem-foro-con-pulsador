@@ -1,0 +1,58 @@
+int Crojo=12;
+int Camarillo=11;
+int Cverde=10;
+
+int Projo=5;
+int Pverde=4;
+
+int Botton=6;
+
+int TiempoPe=2000;
+
+unsigned long UltimoA=0;
+
+void setup()
+{
+  pinMode (Crojo, OUTPUT);
+  pinMode(Camarillo, OUTPUT);
+  pinMode (Cverde, OUTPUT);
+  pinMode (Projo, OUTPUT);
+  pinMode (Pverde, OUTPUT);
+  pinMode (Botton, INPUT);
+  digitalWrite(Cverde, HIGH);
+  digitalWrite(Projo, HIGH);
+}
+
+void loop ()
+{
+  int estado = digitalRead(Botton);
+  if (estado==HIGH	 && (millis () - UltimoA) > 2000){
+  CambioLuz();
+}
+}
+void CambioLuz(){
+digitalWrite(Cverde, LOW);
+digitalWrite (Camarillo, HIGH);
+delay(2000);
+digitalWrite(Camarillo, LOW);
+digitalWrite(Crojo, HIGH);
+delay(1000);
+digitalWrite(Projo, LOW);
+digitalWrite (Pverde, HIGH);
+delay(TiempoPe);
+
+  for (int i=0; i<10; i++){
+  digitalWrite(Pverde, HIGH);
+  delay(250);
+  digitalWrite(Pverde, LOW);
+  delay(250);  
+  }
+  digitalWrite(Projo, HIGH);
+  delay(500);
+  digitalWrite(Camarillo, HIGH);
+  digitalWrite(Crojo, LOW);
+  delay(1000);
+  digitalWrite(Cverde, HIGH);
+  digitalWrite(Camarillo, LOW);
+  UltimoA=millis ();
+}
